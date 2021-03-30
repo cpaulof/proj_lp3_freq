@@ -1,0 +1,10 @@
+app\bd\EMFactory.class
+app\bd\model\Horario.class
+app\bd\model\Base.class
+app\Auth.class
+app\bd\repository\DAOGenerico.class
+app\bd\repository\UserRep.class
+app\bd\model\Turma.class
+app\Logout.class
+app\bd\model\User.class
+app\bd\service\UserService.class
