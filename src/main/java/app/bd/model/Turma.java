@@ -1,6 +1,6 @@
 package app.bd.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.*;
 
@@ -10,9 +10,33 @@ public class Turma implements Base{
     @Id @GeneratedValue
     private Integer id;
 
-    private LocalDateTime inicio;
+    private String nome;
+    
 
-    private LocalDateTime fim;
+    private String dias;
+
+    private LocalTime inicio;
+
+    private LocalTime fim;
+
+    private Double lat;
+    private Double lon;
+
+    public Double getLat() {
+        return this.lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLon() {
+        return this.lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
 
 
     public Integer getId() {
@@ -23,21 +47,42 @@ public class Turma implements Base{
         this.id = id;
     }
 
-    public LocalDateTime getInicio() {
+    public String getDias() {
+        return this.dias;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDias(String dias) {
+        this.dias = dias;
+    }
+
+    public LocalTime getInicio() {
         return this.inicio;
     }
 
-    public void setInicio(LocalDateTime inicio) {
+    public void setInicio(LocalTime inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDateTime getFim() {
+    public LocalTime getFim() {
         return this.fim;
     }
 
-    public void setFim(LocalDateTime fim) {
+    public void setFim(LocalTime fim) {
         this.fim = fim;
     }
-
+    
+    @Override
+    public String toString(){
+        String format = "{\"id\": %d, \"nome\": \"%s\", \"inicio\": \"%s\", \"fim\": \"%s\", \"dias\": \"%s\"}";
+        return String.format(format, id, nome, inicio, fim, dias);
+    }
 }
 

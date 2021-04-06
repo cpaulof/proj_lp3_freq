@@ -1,0 +1,74 @@
+
+#cliente envia solicitação pra receber a lista de disciplinas que está inscrito.
+
+request:
+/classlist?token=XXXX
+
+response:
+
+{  "type": "bad request"
+}
+
+{  "type": "invalid token"
+}
+
+{
+  "type":"success",
+  "classes": [
+    {
+      "id": 1,
+      "nome": "xxxx",
+      "inicio": "XX:XX"
+      "fim": "XX:XX"
+      "dias": "23456"
+      },
+    {
+      "id": 5,
+      "nome": "yyyy",
+      "inicio": "XX:XX"
+      "fim": "XX:XX"
+      "dias": "35"
+      }
+    ]
+}
+
+server side:
+checar request.
+checar token 
+obter lista de disciplinas
+enviar resultado.
+
+
+
+
+
+
+
+
+/presenca?token=XXXX&classid=Y&lat=X&lon=Y
+{  "type": "bad request"
+}
+
+{  "type": "invalid token"
+}
+
+{
+  "type":"success",
+  "presente: true,
+}
+
+{
+  "type":"success",
+  "presente: false,
+}
+
+	
+server side:
+checar request.
+checar token + disciplina
+detectar inicio/fim do horario
+calcular distancia entre o local da disciplina e a posição enviada.
+registrar presença/meia presença.
+enviar confirmação.
+
+
