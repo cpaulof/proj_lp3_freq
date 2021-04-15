@@ -26,4 +26,10 @@ public class HorarioService {
         }
         return r;
     }
+
+    public Boolean hasUser(User user, Turma turma){
+        Horario horario = manager.createQuery("from Horario where user_id=:id and turma_id=:turma", Horario.class).setParameter("id", user.getId()
+            ).setParameter("turma", turma.getId()).getSingleResult();
+        return horario!=null;
+    }
 }

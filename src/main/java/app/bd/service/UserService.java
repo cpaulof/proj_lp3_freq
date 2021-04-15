@@ -1,8 +1,14 @@
 package app.bd.service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javax.persistence.EntityManager;
 
+import app.Position;
+import app.Utils;
 import app.bd.EMFactory;
+import app.bd.model.Turma;
 import app.bd.model.User;
 import app.bd.repository.UserRep;
 
@@ -64,5 +70,32 @@ public class UserService {
             System.out.println(e.getMessage());
         }
         return null;   
+    }
+
+    public int solicitaPresenca(User user, Turma turma, String position){
+        LocalDate now = LocalDate.now();
+        Boolean validDay = false;
+        char today = Character.forDigit(now.getDayOfWeek().getValue() + 1, 10);
+        String days = turma.getDias();
+        for(int i=0; i<days.length(); i++){
+            if(days.charAt(i) == today)
+                validDay = true;
+        }
+
+        if(!validDay) 
+            return 0;
+
+        int a = turma.getInicio().compareTo(LocalTime.now());
+        int b = turma.getFim().compareTo(LocalTime.now());
+        if(a<0 || b>0)
+            return 2;
+        
+        Position turmaPos = new Position(turma.getLat(), turma.getLon());
+        Position alunoPos = new Position(position);
+        Double distance = Utils.distanceBetween(turmaPos, alunoPos);
+
+        if(distance < 150.0)
+            return 1;
+        return -1;
     }
 }

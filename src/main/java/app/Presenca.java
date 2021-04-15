@@ -3,6 +3,7 @@ package app;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.lang.model.util.ElementScanner6;
 //import javax.json.Json;
 //import javax.json.JsonArray;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import app.bd.model.Turma;
 import app.bd.model.User;
+import app.bd.service.HorarioService;
 import app.bd.service.TurmaService;
 import app.bd.service.UserService;
 
@@ -23,9 +25,9 @@ public class Presenca extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserService();
         TurmaService turmaService = new TurmaService();
+        HorarioService horarioService = new HorarioService();
         String type = "bad request";
-        Double distance = null;
-
+        int typeCode = -333;
         String token = req.getParameter("token");
         String classId = req.getParameter("classid");
         String position = req.getParameter("position");
@@ -35,25 +37,42 @@ public class Presenca extends HttpServlet {
                 Turma turma = turmaService.getTurmaById(Integer.parseInt(classId));
                 if(user==null || turma==null)
                     type = "invalid token";
+                else if(!horarioService.hasUser(user, turma))
+                    type = "Nao inscrito na disciplina";
                 else{
                     //code
-                    type = "success";
-                    Position p1 = new Position("-2.536186, -44.278238");
-                    Position p2 = new Position(position);
-    
-                    distance = Utils.distanceBetween(p1, p2);
-    
+                    
+                    
+                    int success = userService.solicitaPresenca(user, turma, position);
+                    switch(success){
+                        case 0:
+                        type = "Dia Invalido para o horario";
+                        typeCode = 0;
+                        break;
+
+                        case 1:
+                        type = "success";
+                        typeCode = 1;
+                        break;
+
+                        case 2:
+                        type = "Fora do horario";
+                        typeCode = 2;
+                        break;
+
+                        default:
+                        typeCode = -1;
+                        type = "Fora do raio de presenca!";
+                    }
                 }
             }
         }catch(Exception e){
             type = "invalid request";
+            System.out.println(e.getMessage());
         }
         
         String result;
-        if(distance!=null)
-            result = String.format("{\"type\":\"%s\", \"distance\":%f}", type, distance);
-        else
-            result = String.format("{\"type\":\"%s\"}", type);
+        result = String.format("{\"type\":\"%s\", \"code\":\"%d\"}", type, typeCode);
         
 
         resp.setStatus(200);

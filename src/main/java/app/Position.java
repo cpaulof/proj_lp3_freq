@@ -10,6 +10,10 @@ public class Position {
         latitude = Double.parseDouble(p[0]);
         longitude = Double.parseDouble(p[1]);
     }
+    public Position(Double lat, Double lon){
+        latitude = lat;
+        longitude = lon;
+    }
 
     @Override
     public String toString(){

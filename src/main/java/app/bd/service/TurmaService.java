@@ -21,4 +21,5 @@ public class TurmaService {
     public Turma getTurmaById(Integer id){
         return turmaRep.buscaPor(id);
     }
+
 }
