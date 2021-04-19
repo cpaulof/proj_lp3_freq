@@ -35,7 +35,7 @@ public class ClassList extends HttpServlet {
                 //code
                 type = "success";
                 classes = "[";
-                ArrayList<Turma> turmas = horarioService.getClassList(user);
+                ArrayList<ClassListObj> turmas = horarioService.getClassList(user);
                 for(int i=0; i<turmas.size(); i++){
                     classes += turmas.get(i).toString();
                     if(i < turmas.size()-1)

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 
+import app.ClassListObj;
 import app.bd.EMFactory;
 import app.bd.model.Horario;
 import app.bd.model.Turma;
@@ -19,17 +20,28 @@ public class HorarioService {
         this.horarioRep = new HorarioRep(manager);
     }
 
-    public ArrayList<Turma> getClassList(User user){
-        ArrayList<Turma> r = new ArrayList<Turma>();
+    public ArrayList<ClassListObj> getClassList(User user){
+        ArrayList<ClassListObj> r = new ArrayList<ClassListObj>();
         for (Horario horario : horarioRep.listaHorario(user)) {
-            r.add(horario.getTurma());
+            r.add(new ClassListObj(horario.getTurma(), horario));
         }
         return r;
+    }
+
+    public Horario get(Integer id){
+        return horarioRep.buscaPor(id);
     }
 
     public Boolean hasUser(User user, Turma turma){
         Horario horario = manager.createQuery("from Horario where user_id=:id and turma_id=:turma", Horario.class).setParameter("id", user.getId()
             ).setParameter("turma", turma.getId()).getSingleResult();
         return horario!=null;
+    }
+
+    
+    public Horario getHorario(User user, Turma turma){
+        Horario horario = manager.createQuery("from Horario where user_id=:id and turma_id=:turma", Horario.class).setParameter("id", user.getId()
+            ).setParameter("turma", turma.getId()).getSingleResult();
+        return horario;
     }
 }

@@ -1,7 +1,9 @@
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\repository\DAOGenerico.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\repository\TurmaRep.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\repository\HorarioRep.java
+C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\repository\ChamadaRep.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\service\TurmaService.java
+C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\service\ChamadaService.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\service\HorarioService.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\repository\UserRep.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\Doc.java
@@ -14,6 +16,8 @@ C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\model\Horario.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\Auth.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\ClassList.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\model\Base.java
+C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\ClassListObj.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\Utils.java
+C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\bd\model\Chamada.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\Logout.java
 C:\Users\Paulo\Desktop\java\servletjetty\src\main\java\app\Presenca.java

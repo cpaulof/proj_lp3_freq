@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import app.Position;
 import app.Utils;
 import app.bd.EMFactory;
+import app.bd.model.Horario;
 import app.bd.model.Turma;
 import app.bd.model.User;
 import app.bd.repository.UserRep;
@@ -72,7 +73,7 @@ public class UserService {
         return null;   
     }
 
-    public int solicitaPresenca(User user, Turma turma, String position){
+    public int solicitaPresenca(ChamadaService chamadaService, Horario horario, User user, Turma turma, String position){
         LocalDate now = LocalDate.now();
         Boolean validDay = false;
         char today = Character.forDigit(now.getDayOfWeek().getValue() + 1, 10);
@@ -94,8 +95,11 @@ public class UserService {
         Position alunoPos = new Position(position);
         Double distance = Utils.distanceBetween(turmaPos, alunoPos);
 
-        if(distance < 150.0)
+        if(distance < 150.0){
+            chamadaService.adicionaChamada(horario);
             return 1;
+        }
+            
         return -1;
     }
 }
